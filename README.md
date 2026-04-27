@@ -97,6 +97,7 @@ docker exec -it kafka-broker kafka-console-consumer.sh --topic weather-api --fro
 Jika berhasil, data JSON cuaca akan muncul di terminal.
 
 ## Bagian Anggota 3: Producer RSS & Consumer HDFS (RSS → Kafka → HDFS)
+Clarissa Aydin - 5027241014
 
 ### Tugas:
 1. Producer RSS: Mengambil berita cuaca terbaru dari RSS Feed (Tempo & Kompas) dan mengirimkannya ke Kafka topic: weather-rss.
