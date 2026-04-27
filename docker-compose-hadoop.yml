@@ -44,5 +44,8 @@ services:
       SERVICE_PRECONDITION: "namenode:9870 datanode:9864"
     env_file:
       - ./hadoop.env
+<<<<<<< HEAD
     networks:
       - ets-network
+=======
+>>>>>>> 01cecaeb2618cc9347b7edad1d408c5e7ad8c558
