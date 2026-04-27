@@ -142,5 +142,7 @@ python3 kafka/producer_rss.py
 python3 kafka/consumer_to_hdfs.py
 ```
 
+docker exec -it namenode hdfs dfs -ls -R /data/weather
+
 <img width="1158" height="133" alt="image" src="https://github.com/user-attachments/assets/e33d6d72-be72-4b1c-ab7f-ea53e99bee3e" />
 
