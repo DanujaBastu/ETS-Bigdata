@@ -1,10 +1,19 @@
+#Danuja - 037
 version: "3"
+networks:
+  ets-network:
+    driver: bridge
+    driver_opts:
+      com.docker.network.enable_ipv6: "false"
+
 services:
   zookeeper:
     image: wurstmeister/zookeeper
     ports:
       - "2181:2181"
     container_name: zookeeper
+    networks:
+      - ets-network
 
   kafka-broker:
     image: wurstmeister/kafka
@@ -17,3 +26,5 @@ services:
     container_name: kafka-broker
     depends_on:
       - zookeeper
+    networks:
+      - ets-network
