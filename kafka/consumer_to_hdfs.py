@@ -1,5 +1,5 @@
 """
-# [Nama Anda]: Consumer to HDFS — WeatherPulse ETS Big Data
+# Clarissa Aydin - 014: Consumer to HDFS — WeatherPulse ETS Big Data
 Membaca dari topic weather-api dan weather-rss, buffer event,
 simpan ke HDFS setiap 3 menit menggunakan Docker Command.
 Juga menyimpan salinan lokal untuk dashboard Flask.

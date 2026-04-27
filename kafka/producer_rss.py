@@ -1,4 +1,5 @@
 """
+Clarissa Aydin - 014: Producer RSS
 producer_rss.py — WeatherPulse ETS Big Data
 Mengambil berita cuaca dari RSS feed dan mengirim ke Kafka topic weather-rss
 Polling interval: setiap 5 menit
