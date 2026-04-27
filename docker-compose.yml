@@ -1,8 +1,8 @@
-#Danuja - 037
+# Danuja - 037
 version: "3"
 
 services:
-  # Hadoop
+  # --- HADOOP ---
   namenode:
     image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
     container_name: namenode
@@ -37,21 +37,21 @@ services:
     env_file:
       - ./hadoop.env
 
-  # Kafka
+  # --- KAFKA ---
   zookeeper:
     image: wurstmeister/zookeeper
+    container_name: zookeeper
     ports:
       - "2181:2181"
-    container_name: zookeeper
 
   kafka-broker:
     image: wurstmeister/kafka
+    container_name: kafka-broker
     ports:
       - "9092:9092"
     environment:
       KAFKA_ADVERTISED_HOST_NAME: localhost
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_CREATE_TOPICS: "weather-api:1:1,weather-rss:1:1"
-    container_name: kafka-broker
     depends_on:
       - zookeeper
