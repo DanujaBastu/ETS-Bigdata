@@ -95,3 +95,54 @@ docker exec -it kafka-broker kafka-console-consumer.sh --topic weather-api --fro
 ```
 
 Jika berhasil, data JSON cuaca akan muncul di terminal.
+
+## Bagian Anggota 3: Producer RSS & Consumer HDFS (RSS → Kafka → HDFS)
+Clarissa Aydin - 5027241014
+
+### Tugas:
+1. Producer RSS: Mengambil berita cuaca terbaru dari RSS Feed (Tempo & Kompas) dan mengirimkannya ke Kafka topic: weather-rss.
+
+2. Consumer to HDFS: Membaca data dari topic weather-api dan weather-rss, melakukan buffering, lalu menyimpannya ke HDFS secara periodik. Script ini juga memperbarui file JSON lokal untuk kebutuhan dashboard.
+
+### File
+- `kafka/producer_rss.py`
+- `kafka/consumer_to_hdfs.py`
+
+### Cara Menjalankan
+
+#### 1. Persiapan Infrastruktur (Docker)
+Jalankan Hadoop & Kafka
+```bash
+docker compose -f docker-compose-kafka.yml up -d
+docker compose -f docker-compose-hadoop.yml up -d
+```
+Cek apakah semua kontainer sudah status (Up)
+```bash
+docker ps
+```
+
+#### 2. Persiapan Environment Python
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install kafka-python feedparser requests hdfs # Pastikan library pendukung sudah terinstall
+```
+
+#### 3. Menjalankan Data Pipeline
+- Terminal 1: Producer API (Data Cuaca Kota)
+```bash
+python3 kafka/producer_api.py
+```
+- Terminal 2: Producer RSS (Data Berita Cuaca)
+```bash
+python3 kafka/producer_rss.py
+```
+- Terminal 3: Consumer to HDFS (Pusat Data)
+```bash
+python3 kafka/consumer_to_hdfs.py
+```
+
+docker exec -it namenode hdfs dfs -ls -R /data/weather
+
+<img width="1158" height="133" alt="image" src="https://github.com/user-attachments/assets/e33d6d72-be72-4b1c-ab7f-ea53e99bee3e" />
+
