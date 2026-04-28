@@ -49,7 +49,7 @@ pip install kafka-python requests feedparser hdfs pyspark pandas flask
 ---
 
 ## 👨‍💻 Bagian Anggota 2 — Producer API (Open-Meteo → Kafka)
-
+Raihan - 061
 ### 📌 Tugas
 Mengambil data cuaca real-time dari **Open-Meteo API** lalu mengirimkannya ke Kafka topic:
 
