@@ -17,13 +17,14 @@ from kafka import KafkaProducer
 # =========================
 # Konfigurasi
 # =========================
-BOOTSTRAP_SERVER = "localhost:9092"   # sama dengan producer_api.py teman
+BOOTSTRAP_SERVER = "localhost:9092"   # sama dengan producer_api.py 
 TOPIC_NAME = "weather-rss"
 INTERVAL_SECONDS = 300                # 5 menit
  
 RSS_FEEDS = [
-    "https://rss.tempo.co/tag/cuaca",
-    "https://rss.kompas.com/feed/kompas.com/sains/environment",  # backup
+    "https://www.antaranews.com/rss/warta-bumi.xml",       # Berita lingkungan & cuaca Antara
+    "https://www.republika.co.id/rss/leisure/info-sehat", # Alternatif (sering update lingkungan)
+    "https://lapi.okezone.com/news/rss/622/rss.xml"       # Fokus ke news (cuaca sering masuk sini)
 ]
  
 logging.basicConfig(
