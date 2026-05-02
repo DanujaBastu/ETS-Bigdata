@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WeatherPulse — Monitor Cuaca 6 Kota Indonesia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+
+  <!-- SVG Icon Sprite -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+    <symbol id="ico-cloud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></symbol>
+    <symbol id="ico-thermometer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></symbol>
+    <symbol id="ico-droplet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></symbol>
+    <symbol id="ico-wind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/></symbol>
+    <symbol id="ico-lightning" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+    <symbol id="ico-bar-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></symbol>
+    <symbol id="ico-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
+    <symbol id="ico-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+    <symbol id="ico-newspaper" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></symbol>
+    <symbol id="ico-database" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></symbol>
+    <symbol id="ico-activity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></symbol>
+    <symbol id="ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></symbol>
+    <symbol id="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
+    <symbol id="ico-trending" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></symbol>
+    <symbol id="ico-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="ico-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></symbol>
+    <symbol id="ico-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></symbol>
+    <symbol id="ico-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
+    <symbol id="ico-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></symbol>
+    <symbol id="ico-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+    <symbol id="ico-signal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6c0 0 4-2 11-2s11 2 11 2"/><path d="M3.5 10.5c0 0 2.5-1.5 8.5-1.5s8.5 1.5 8.5 1.5"/><path d="M6.5 15c0 0 1.5-1 5.5-1s5.5 1 5.5 1"/><line x1="12" y1="20" x2="12" y2="20"/></symbol>
+  </svg>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-brand">
+        <div class="brand-logo">
+          <svg><use href="#ico-cloud"/></svg>
+        </div>
+        <div>
+          <h1 class="brand-title">WeatherPulse</h1>
+          <p class="brand-sub">Monitor Cuaca 6 Kota Besar Indonesia</p>
+        </div>
+      </div>
+      <div class="header-meta">
+        <div class="status-badge" id="statusBadge">
+          <span class="status-dot"></span>
+          <span>Live</span>
+        </div>
+        <div class="meta-group">
+          <span class="meta-label">Diperbarui</span>
+          <span id="lastUpdate" class="meta-val">—</span>
+        </div>
+        <div class="meta-group">
+          <svg class="meta-icon"><use href="#ico-refresh"/></svg>
+          <span id="countdown" class="meta-val">30s</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pipeline-bar">
+      <div class="pipeline-step">
+        <svg class="pipe-svg"><use href="#ico-globe"/></svg>
+        <span>Open-Meteo API</span>
+      </div>
+      <svg class="pipe-arrow-svg"><use href="#ico-arrow-right"/></svg>
+      <div class="pipeline-step active">
+        <svg class="pipe-svg"><use href="#ico-signal"/></svg>
+        <span>Apache Kafka</span>
+      </div>
+      <svg class="pipe-arrow-svg"><use href="#ico-arrow-right"/></svg>
+      <div class="pipeline-step active">
+        <svg class="pipe-svg"><use href="#ico-database"/></svg>
+        <span>HDFS</span>
+      </div>
+      <svg class="pipe-arrow-svg"><use href="#ico-arrow-right"/></svg>
+      <div class="pipeline-step active">
+        <svg class="pipe-svg"><use href="#ico-lightning"/></svg>
+        <span>Apache Spark</span>
+      </div>
+      <svg class="pipe-arrow-svg"><use href="#ico-arrow-right"/></svg>
+      <div class="pipeline-step active current">
+        <svg class="pipe-svg"><use href="#ico-activity"/></svg>
+        <span>Dashboard</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Panel 1: Live Weather -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-label">Panel 1</div>
+        <div class="section-title-row">
+          <svg class="section-ico"><use href="#ico-thermometer"/></svg>
+          <h2 class="section-title">Kondisi Cuaca Live</h2>
+        </div>
+        <p class="section-desc">Data real-time dari consumer Kafka</p>
+      </div>
+      <div id="weatherGrid" class="weather-grid">
+        <div class="loading-state"><div class="spinner"></div><p>Memuat data cuaca...</p></div>
+      </div>
+    </section>
+
+    <!-- Panel 2: Spark Analysis -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-label">Panel 2</div>
+        <div class="section-title-row">
+          <svg class="section-ico"><use href="#ico-lightning"/></svg>
+          <h2 class="section-title">Analisis Apache Spark</h2>
+        </div>
+        <p class="section-desc">Hasil batch processing dari HDFS — 3 analisis wajib</p>
+      </div>
+
+      <div class="spark-tabs">
+        <button class="tab-btn active" onclick="showTab('tab1', this)">
+          <svg class="tab-ico"><use href="#ico-bar-chart"/></svg>Perbandingan Suhu
+        </button>
+        <button class="tab-btn" onclick="showTab('tab2', this)">
+          <svg class="tab-ico"><use href="#ico-alert"/></svg>Deteksi Ekstrem
+        </button>
+        <button class="tab-btn" onclick="showTab('tab3', this)">
+          <svg class="tab-ico"><use href="#ico-clock"/></svg>Tren Per Jam
+        </button>
+      </div>
+
+      <div id="tab1" class="tab-content active">
+        <div class="analysis-card">
+          <div class="analysis-header">
+            <h3>Analisis 1 — Perbandingan Suhu Antar Kota</h3>
+            <span class="analysis-badge">Spark SQL + DataFrame API</span>
+          </div>
+          <div id="sparkSummary1" class="spark-summary">
+            <div class="loading-state"><div class="spinner"></div><p>Memuat...</p></div>
+          </div>
+          <div id="tempTable" class="data-table-wrap">
+            <div class="loading-state"><div class="spinner"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab2" class="tab-content">
+        <div class="analysis-card">
+          <div class="analysis-header">
+            <h3>Analisis 2 — Deteksi Kondisi Cuaca Ekstrem</h3>
+            <span class="analysis-badge">Suhu &gt; 35°C &nbsp;|&nbsp; Kelembaban &gt; 90% &nbsp;|&nbsp; Angin &gt; 40 km/h</span>
+          </div>
+          <div id="extremeContent" class="spark-summary">
+            <div class="loading-state"><div class="spinner"></div><p>Memuat...</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab3" class="tab-content">
+        <div class="analysis-card">
+          <div class="analysis-header">
+            <h3>Analisis 3 — Tren Suhu Per Jam (Pola Diurnal)</h3>
+            <span class="analysis-badge">groupBy HOUR(timestamp)</span>
+          </div>
+          <div id="hourlyContent" class="spark-summary">
+            <div class="loading-state"><div class="spinner"></div><p>Memuat...</p></div>
+          </div>
+          <div id="hourlyChart" class="hourly-chart"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Panel 3: News Feed -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-label">Panel 3</div>
+        <div class="section-title-row">
+          <svg class="section-ico"><use href="#ico-newspaper"/></svg>
+          <h2 class="section-title">Berita Cuaca Terbaru</h2>
+        </div>
+        <p class="section-desc">Feed terbaru dari consumer RSS Kafka</p>
+      </div>
+      <div id="newsFeed" class="news-feed">
+        <div class="loading-state"><div class="spinner"></div><p>Memuat berita...</p></div>
+      </div>
+    </section>
+
+    <!-- Footer Info -->
+    <div class="footer-info">
+      <div class="info-grid">
+        <div class="info-item">
+          <div class="info-icon-wrap"><svg><use href="#ico-users"/></svg></div>
+          <div><strong>Kelompok 8</strong><span>5 Anggota</span></div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon-wrap"><svg><use href="#ico-cloud"/></svg></div>
+          <div><strong>Topik 2 — WeatherPulse</strong><span>Big Data dan Data Lakehouse</span></div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon-wrap"><svg><use href="#ico-layers"/></svg></div>
+          <div><strong>Stack</strong><span>Kafka · HDFS · Spark · Flask</span></div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon-wrap"><svg><use href="#ico-globe"/></svg></div>
+          <div><strong>Data Source</strong><span>Open-Meteo API · Tempo RSS</span></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    const REFRESH_INTERVAL = 30000;
+    let countdownTimer = REFRESH_INTERVAL / 1000;
+    let refreshInterval, countdownInterval;
+
+    function formatTime(isoStr) {
+      if (!isoStr) return "—";
+      try {
+        const d = new Date(isoStr);
+        return d.toLocaleString("id-ID", {
+          day: "2-digit", month: "short", year: "numeric",
+          hour: "2-digit", minute: "2-digit", second: "2-digit"
+        });
+      } catch { return isoStr; }
+    }
+
+    function statusClass(s) {
+      return s === "ekstrem" ? "status-ekstrem" : s === "waspada" ? "status-waspada" : "status-normal";
+    }
+
+    function tempColor(t) {
+      if (t >= 35) return "var(--accent-red)";
+      if (t >= 32) return "var(--accent-warn)";
+      if (t >= 28) return "var(--accent-yellow)";
+      return "var(--accent-blue)";
+    }
+
+    function weatherIconId(code) {
+      if (code === 0 || code === 1) return "#ico-sun";
+      if (code <= 3)                return "#ico-cloud";
+      if (code >= 95)               return "#ico-lightning";
+      return "#ico-droplet";
+    }
+
+    // Panel 1
+    function renderWeather(cities) {
+      const el = document.getElementById("weatherGrid");
+      if (!cities || cities.length === 0) {
+        el.innerHTML = `<div class="no-data">Data live belum tersedia — pastikan consumer_to_hdfs.py sedang berjalan.</div>`;
+        return;
+      }
+      el.innerHTML = cities.map(c => {
+        const statusLbl = c.status === "ekstrem" ? "KONDISI EKSTREM" : c.status === "waspada" ? "PERLU PERHATIAN" : "NORMAL";
+        return `
+          <div class="weather-card ${statusClass(c.status)}">
+            <div class="card-top">
+              <span class="city-code">${c.kode_kota || "—"}</span>
+              <div class="card-status-pill ${statusClass(c.status)}">${statusLbl}</div>
+            </div>
+            <div class="city-name">${c.nama_kota || "—"}</div>
+            <div class="card-weather-row">
+              <svg class="weather-svg"><use href="${weatherIconId(c.weather_code)}"/></svg>
+              <div class="temp-display" style="color:${tempColor(c.temperature)}">
+                ${c.temperature !== undefined ? c.temperature.toFixed(1) + "°C" : "—"}
+              </div>
+            </div>
+            <div class="weather-desc">${c.weather_desc || "—"}</div>
+            <div class="weather-metrics">
+              <div class="metric">
+                <svg class="metric-svg"><use href="#ico-droplet"/></svg>
+                <span class="metric-val">${c.humidity !== undefined ? c.humidity + "%" : "—"}</span>
+                <span class="metric-label">Kelembaban</span>
+              </div>
+              <div class="metric">
+                <svg class="metric-svg"><use href="#ico-wind"/></svg>
+                <span class="metric-val">${c.wind_speed !== undefined ? c.wind_speed + " km/h" : "—"}</span>
+                <span class="metric-label">Angin</span>
+              </div>
+            </div>
+            <div class="card-timestamp">${formatTime(c.timestamp)}</div>
+          </div>`;
+      }).join("");
+    }
+
+    // Panel 2
+    function renderSpark(spark) {
+      if (!spark || !spark.analysis) {
+        document.getElementById("sparkSummary1").innerHTML =
+          `<div class="no-data">Hasil Spark belum tersedia — jalankan spark/analysis.ipynb terlebih dahulu.</div>`;
+        return;
+      }
+      const a = spark.analysis;
+
+      // Analisis 1
+      const a1 = a.analisis_1_temperature_comparison;
+      if (a1 && a1.summary) {
+        const s = a1.summary;
+        document.getElementById("sparkSummary1").innerHTML = `
+          <div class="summary-row">
+            <div class="summary-stat hot">
+              <svg class="stat-svg"><use href="#ico-sun"/></svg>
+              <div class="stat-label">Kota Terpanas</div>
+              <div class="stat-value">${s.hottest_city || "—"}</div>
+              <div class="stat-sub">${s.hottest_avg_temp !== undefined ? s.hottest_avg_temp.toFixed(1) + "°C" : ""}</div>
+            </div>
+            <div class="summary-stat cold">
+              <svg class="stat-svg"><use href="#ico-moon"/></svg>
+              <div class="stat-label">Kota Terdingin</div>
+              <div class="stat-value">${s.coldest_city || "—"}</div>
+              <div class="stat-sub">${s.coldest_avg_temp !== undefined ? s.coldest_avg_temp.toFixed(1) + "°C" : ""}</div>
+            </div>
+            <div class="summary-stat volatile">
+              <svg class="stat-svg"><use href="#ico-trending"/></svg>
+              <div class="stat-label">Paling Fluktuatif</div>
+              <div class="stat-value">${s.most_volatile_city || "—"}</div>
+              <div class="stat-sub">Range: ${s.most_volatile_range !== undefined ? s.most_volatile_range.toFixed(1) + "°C" : "—"}</div>
+            </div>
+          </div>`;
+
+        if (a1.detailed_data) {
+          const rows = a1.detailed_data.map(r => `
+            <tr>
+              <td><span class="kode-badge">${r.kode_kota}</span></td>
+              <td>${r.nama_kota}</td>
+              <td class="num" style="color:${tempColor(r.rata_rata_suhu)}">${r.rata_rata_suhu?.toFixed(1)}°C</td>
+              <td class="num">${r.suhu_tertinggi?.toFixed(1)}°C</td>
+              <td class="num">${r.suhu_terendah?.toFixed(1)}°C</td>
+              <td class="num">${r.std_dev_suhu?.toFixed(2)}</td>
+              <td class="num">${r.jumlah_observasi}</td>
+            </tr>`).join("");
+          document.getElementById("tempTable").innerHTML = `
+            <table class="data-table">
+              <thead><tr>
+                <th>Kode</th><th>Kota</th>
+                <th>Rata-rata</th><th>Tertinggi</th><th>Terendah</th>
+                <th>Std Dev</th><th>Observasi</th>
+              </tr></thead>
+              <tbody>${rows}</tbody>
+            </table>`;
+        }
+      }
+
+      // Analisis 2
+      const a2 = a.analisis_2_extreme_weather;
+      if (a2 && a2.summary) {
+        const s = a2.summary;
+        const dangerRows = (s.dangerous_cities || []).map(c => `
+          <div class="danger-row">
+            <svg class="danger-svg"><use href="#ico-alert"/></svg>
+            <strong>${c.nama_kota}</strong>
+            <span class="danger-count">${c.total_ekstrem} kejadian</span>
+          </div>`).join("") || `<p class="no-extreme">Tidak ada kota dengan kondisi cuaca ekstrem terdeteksi.</p>`;
+
+        document.getElementById("extremeContent").innerHTML = `
+          <div class="extreme-summary">
+            <div class="extreme-total">
+              <span class="total-num">${s.total_extreme_events || 0}</span>
+              <span class="total-label">Total Kejadian Ekstrem</span>
+            </div>
+            <div class="danger-list">${dangerRows}</div>
+          </div>
+          <div class="extreme-criteria">
+            <span class="criteria-label">Kriteria:</span>
+            <span class="criteria-tag">Suhu &gt; 35°C</span>
+            <span class="criteria-tag">Kelembaban &gt; 90%</span>
+            <span class="criteria-tag">Angin &gt; 40 km/h</span>
+          </div>`;
+      }
+
+      // Analisis 3
+      const a3 = a.analisis_3_hourly_trend;
+      if (a3 && a3.summary) {
+        const s = a3.summary;
+        const optHours = s.optimal_delivery_hours && s.optimal_delivery_hours.length > 0
+          ? s.optimal_delivery_hours.join(", ") + " WIB" : "Data belum cukup";
+
+        document.getElementById("hourlyContent").innerHTML = `
+          <div class="summary-row">
+            <div class="summary-stat hot">
+              <svg class="stat-svg"><use href="#ico-sun"/></svg>
+              <div class="stat-label">Jam Terpanas</div>
+              <div class="stat-value">${s.hottest_hour !== undefined ? s.hottest_hour + ":00" : "—"}</div>
+            </div>
+            <div class="summary-stat cold">
+              <svg class="stat-svg"><use href="#ico-moon"/></svg>
+              <div class="stat-label">Jam Terdingin</div>
+              <div class="stat-value">${s.coldest_hour !== undefined ? s.coldest_hour + ":00" : "—"}</div>
+            </div>
+            <div class="summary-stat">
+              <svg class="stat-svg"><use href="#ico-clock"/></svg>
+              <div class="stat-label">Jam Optimal Kirim</div>
+              <div class="stat-value" style="font-size:.82rem">${optHours}</div>
+            </div>
+          </div>`;
+
+        if (a3.hourly_data && a3.hourly_data.length > 0) {
+          const maxTemp = Math.max(...a3.hourly_data.map(h => h.rata_rata_suhu_jam));
+          const bars = a3.hourly_data.map(h => {
+            const pct = ((h.rata_rata_suhu_jam / maxTemp) * 100).toFixed(1);
+            return `
+              <div class="chart-bar-wrap">
+                <div class="chart-bar-val">${h.rata_rata_suhu_jam?.toFixed(1)}°</div>
+                <div class="chart-bar-col">
+                  <div class="chart-bar" style="height:${pct}%;background:${tempColor(h.rata_rata_suhu_jam)}"></div>
+                </div>
+                <div class="chart-bar-label">${h.jam}:00</div>
+                <div class="chart-obs">${h.jumlah_observasi}x</div>
+              </div>`;
+          }).join("");
+          document.getElementById("hourlyChart").innerHTML = `
+            <div class="chart-title">Rata-rata Suhu per Jam (WIB)</div>
+            <div class="bar-chart">${bars}</div>`;
+        }
+      }
+    }
+
+    // Panel 3
+    function renderNews(news) {
+      const el = document.getElementById("newsFeed");
+      if (!news || news.length === 0) {
+        el.innerHTML = `<div class="no-data">Berita belum tersedia — pastikan producer_rss.py dan consumer berjalan.</div>`;
+        return;
+      }
+      el.innerHTML = news.map((n, i) => `
+        <article class="news-item">
+          <div class="news-num">${String(i + 1).padStart(2, "0")}</div>
+          <div class="news-body">
+            <h3 class="news-title">
+              ${n.link ? `<a href="${n.link}" target="_blank" rel="noopener">${n.title || "Tanpa Judul"}</a>` : (n.title || "Tanpa Judul")}
+            </h3>
+            ${n.summary ? `<p class="news-summary">${n.summary.substring(0, 200)}${n.summary.length > 200 ? "…" : ""}</p>` : ""}
+            <div class="news-meta">
+              ${n.sumber ? `<span class="news-source"><svg class="news-svg"><use href="#ico-signal"/></svg>${n.sumber}</span>` : ""}
+              ${n.published ? `<span class="news-time"><svg class="news-svg"><use href="#ico-clock"/></svg>${formatTime(n.published)}</span>` : ""}
+            </div>
+          </div>
+          ${n.link ? `<a href="${n.link}" target="_blank" class="news-link-ico"><svg><use href="#ico-link"/></svg></a>` : ""}
+        </article>`).join("");
+    }
+
+    async function fetchAndUpdate() {
+      try {
+        const res  = await fetch("/api/data");
+        const data = await res.json();
+        document.getElementById("lastUpdate").textContent = formatTime(data.last_updated);
+        renderWeather(data.live_weather);
+        renderSpark(data.spark);
+        renderNews(data.live_rss);
+        const badge = document.getElementById("statusBadge");
+        badge.classList.remove("status-error");
+        badge.querySelector("span:last-child").textContent = "Live";
+      } catch (err) {
+        console.error(err);
+        document.getElementById("statusBadge").classList.add("status-error");
+        document.getElementById("statusBadge").querySelector("span:last-child").textContent = "Error";
+      }
+    }
+
+    function showTab(tabId, btn) {
+      document.querySelectorAll(".tab-content").forEach(el => el.classList.remove("active"));
+      document.querySelectorAll(".tab-btn").forEach(el => el.classList.remove("active"));
+      document.getElementById(tabId).classList.add("active");
+      btn.classList.add("active");
+    }
+
+    function startCountdown() {
+      countdownTimer = REFRESH_INTERVAL / 1000;
+      clearInterval(countdownInterval);
+      countdownInterval = setInterval(() => {
+        countdownTimer--;
+        document.getElementById("countdown").textContent = countdownTimer + "s";
+        if (countdownTimer <= 0) countdownTimer = REFRESH_INTERVAL / 1000;
+      }, 1000);
+    }
+
+    fetchAndUpdate();
+    startCountdown();
+    refreshInterval = setInterval(() => { fetchAndUpdate(); startCountdown(); }, REFRESH_INTERVAL);
+  </script>
+</body>
+</html>
