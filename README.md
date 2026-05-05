@@ -151,7 +151,6 @@ Producer RSS (Data Berita Cuaca)
 
 
 consumer_to_hdfs.py
-docker exec -it namenode hdfs dfs -ls -R /data/weather
 
 <img width="1107" height="576" alt="image" src="https://github.com/user-attachments/assets/9c1417d4-d7a8-45a2-a8b9-a802feeb5245" />
 
@@ -160,5 +159,12 @@ docker exec -it namenode hdfs dfs -ls -R /data/weather
 
 <img width="1113" height="354" alt="image" src="https://github.com/user-attachments/assets/5e0c4206-22d3-4035-9f42-4042f195a709" />
 
-<img width="1158" height="133" alt="image" src="https://github.com/user-attachments/assets/e33d6d72-be72-4b1c-ab7f-ea53e99bee3e" />
+docker exec -it namenode hdfs dfs -ls -R /data/weather/rss
+
+<img width="1175" height="62" alt="image" src="https://github.com/user-attachments/assets/9791dea6-674f-43c9-9be5-956d5831dbec" />
+
+docker exec -it namenode hdfs dfs -ls -R /data/weather
+
+<img width="1138" height="178" alt="image" src="https://github.com/user-attachments/assets/bdebde5b-c40f-48f3-b60a-ed205dca0ba6" />
+
 
