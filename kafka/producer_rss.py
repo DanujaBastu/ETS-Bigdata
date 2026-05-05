@@ -22,9 +22,12 @@ TOPIC_NAME = "weather-rss"
 INTERVAL_SECONDS = 300                # 5 menit
  
 RSS_FEEDS = [
-    "https://www.antaranews.com/rss/warta-bumi.xml",       # Berita lingkungan & cuaca Antara
-    "https://www.republika.co.id/rss/leisure/info-sehat", # Alternatif (sering update lingkungan)
-    "https://lapi.okezone.com/news/rss/622/rss.xml"       # Fokus ke news (cuaca sering masuk sini)
+    "https://www.antaranews.com/rss/warta-bumi.xml",       # Eksisting: Lingkungan
+    "https://www.republika.co.id/rss/leisure/info-sehat", # Eksisting
+    "https://lapi.okezone.com/news/rss/622/rss.xml",      # Eksisting
+    "https://www.antaranews.com/rss/tekno.xml",           # BARU: Berita Teknologi
+    "https://rss.tempo.co/tekno",                         # BARU: Tempo Tekno/Sains
+    "https://id.mongabay.com/feed/"                        # BARU: Isu Lingkungan Spesifik
 ]
  
 logging.basicConfig(
