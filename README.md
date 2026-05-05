@@ -1,4 +1,19 @@
-## ⚙️ Cara Menjalankan Project
+# ETS AI
+## Kelompok 8 
+Anggota dan Kontribusi :
+Danuja Prasasta Bastu - 5027241037 -> Setup Docker (Hadoop & Kafka), buat topic, troubleshooting infrastruktur
+Raihan Fahri Ghazali - 5027241061 -> producer_api.py — integrasi API eksternal
+Clarissa Aydin Rahmazea - 5027241014 -> producer_rss.py + consumer_to_hdfs.py
+Dimas Muhammad Putra - 5027241075 -> spark/analysis.ipynb — 3 analisis wajib
+Mochkamad Maulana Syafaat - 5027241021 -> spark/analysis.ipynb — 3 analisis wajib
+
+## Kenapa WeatherPulse?
+Menurut kami, topik ini sangat relevan karena menawarkan representasi nyata dari penerapan Big Data untuk memecahkan masalah industri. Topik ini secara langsung menjawab tantangan geografis dan iklim Indonesia yang dinamis serta sulit diprediksi. Oleh karena itu, kehadiran sistem ini diharapkan dapat memfasilitasi pengambilan keputusan yang lebih akurat terkait keamanan rute pengiriman logistik darat, berdasarkan pantauan kondisi cuaca di kota-kota yang dilalui.
+
+<img width="1440" height="1240" alt="image" src="https://github.com/user-attachments/assets/d4da666e-5f91-4c48-900d-bb70fcaeecc6" />
+
+
+## ⚙️ Setup Project
 Danuja - 037
 
 ### 1️⃣ Nyalakan Hadoop
