@@ -1,0 +1,12 @@
+# Python virtual environment
+env/
+.venv/          ← Tambah ini
+venv/           ← Ubah dari 'env/' jadi 'venv/' (lebih spesifik)
+__pycache__/
+*.pyc
+
+# Data & Hasil (sesuai instruksi dosen)
+dashboard/data/
+
+# Mac OS (kalau ada temanmu yang pakai Mac)
+.DS_Store
