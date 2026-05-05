@@ -152,6 +152,11 @@ Producer RSS (Data Berita Cuaca)
 
 consumer_to_hdfs.py
 
+<img width="1041" height="98" alt="image" src="https://github.com/user-attachments/assets/faa7afea-efd8-4da6-a2c8-e4110cf150e1" />
+
+<img width="777" height="195" alt="image" src="https://github.com/user-attachments/assets/4aaed9f2-abc5-4c81-9dbe-f81d60ee0a3c" />
+
+
 <img width="1107" height="576" alt="image" src="https://github.com/user-attachments/assets/9c1417d4-d7a8-45a2-a8b9-a802feeb5245" />
 
 
