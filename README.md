@@ -153,7 +153,7 @@ Data dari API disimpan ke HDFS
 
 ### Producer RSS (Data Berita Cuaca)
 
-Berhasil mengambil data dari rss
+Berhasil mengambil data dari RSS yang akan disimpan ke Kafka
 <img width="1117" height="668" alt="image" src="https://github.com/user-attachments/assets/53dfcfd3-53a7-41cd-910c-d15878056d47" />
 
 ### Consumer to HDFS (Pusat Data)
@@ -185,10 +185,10 @@ Data dari rss sebelumnya sudah tersimpan di hdfs dalam bentuk `.json` sehingga k
 ## Kendala
 Dalam pengembangan pipeline Big Data WeatherPulse, terdapat beberapa kendala teknis yang saya hadapi, di antaranya:
 
-<img width="1244" height="294" alt="image" src="https://github.com/user-attachments/assets/3eda88bd-2e27-41c6-80e0-68a9e0d28622" />
-
 - Ketersediaan Data pada RSS Feed (Zero-Data Fetch):
 Pada beberapa sesi pengoperasian, ditemukan bahwa sumber RSS tidak menyediakan artikel baru (Fetched 0 artikel). Hal ini terjadi dikarenakan tidak adanya pembaruan data dari sisi penyedia (source) atau sistem deduplikasi pada Producer yang mencegah pengiriman data yang sama secara berulang ke Kafka. Solusi yang diterapkan adalah dengan menambahkan variasi sumber RSS untuk memastikan aliran data tetap terjaga.
+<img width="1244" height="294" alt="image" src="https://github.com/user-attachments/assets/3eda88bd-2e27-41c6-80e0-68a9e0d28622" />
+
 - Manajemen Status Buffer & Offset:
 Munculnya jeda waktu (latency) saat proses Consumer Group Rebalancing mengakibatkan beberapa data awal yang dikirim oleh Producer tidak tertangkap oleh Consumer. Kendala ini diselesaikan dengan memastikan urutan eksekusi yang tepat—menjalankan Consumer hingga status `Ready` sebelum mengaktifkan Producer, serta memantau proses Periodical Flush agar data dalam buffer tidak hilang saat terjadi interupsi sistem.
 
