@@ -147,19 +147,26 @@ python3 kafka/consumer_to_hdfs.py
 
 <img width="1105" height="479" alt="image" src="https://github.com/user-attachments/assets/d04497d7-c728-45e4-9a0f-97950dad9a3e" />
 
-Producer RSS (Data Berita Cuaca)
+### Producer RSS (Data Berita Cuaca)
 
+Berhasil mengambil data dari rss
 <img width="1117" height="668" alt="image" src="https://github.com/user-attachments/assets/53dfcfd3-53a7-41cd-910c-d15878056d47" />
 
-consumer_to_hdfs.py
+### Consumer to HDFS (Pusat Data)
+
+Mengirim data (20 data) ke HDFS
+
+<img width="1107" height="576" alt="image" src="https://github.com/user-attachments/assets/9c1417d4-d7a8-45a2-a8b9-a802feeb5245" />
+
+RSS mengirimkan data setiap 300 detik (dokumentasi di bawah terlihat penambahan data dari artikel sebanyak 89)
 
 <img width="1041" height="98" alt="image" src="https://github.com/user-attachments/assets/faa7afea-efd8-4da6-a2c8-e4110cf150e1" />
+
+Data dari rss sebelumnya sudah tersimpan di hdfs dalam bentuk `.json` sehingga kembali 0, namun karena ditambahkannya data dari artikel lain, `consumer_to_hdfs` bertambah, dan dikirimkan (flush) ke HDFS.
 
 <img width="1268" height="674" alt="image" src="https://github.com/user-attachments/assets/87dd23fc-8c04-4383-aa88-9bcbd81f9ada" />
 
 
-
-<img width="1107" height="576" alt="image" src="https://github.com/user-attachments/assets/9c1417d4-d7a8-45a2-a8b9-a802feeb5245" />
 
 
 <img width="1028" height="551" alt="image" src="https://github.com/user-attachments/assets/6c848b21-aa66-41d7-b515-283402ffd733" />
