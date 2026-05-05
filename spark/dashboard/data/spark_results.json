@@ -1,0 +1,128 @@
+{
+  "metadata": {
+    "project": "WeatherPulse",
+    "analysis_timestamp": "2026-04-28T21:26:07.499781",
+    "description": "Spark analysis untuk 6 kota besar Indonesia",
+    "cities": [
+      "Jakarta",
+      "Surabaya",
+      "Semarang",
+      "Medan",
+      "Makassar",
+      "Denpasar"
+    ],
+    "environment": "kafka-production",
+    "mode": "pandas-development"
+  },
+  "analysis": {
+    "analisis_1_temperature_comparison": {
+      "analisis": "temperature_comparison",
+      "timestamp": "2026-04-28T21:25:34.749617",
+      "summary": {
+        "hottest_city": "Surabaya",
+        "hottest_city_code": "SBY",
+        "hottest_avg_temp": 27.5,
+        "coldest_city": "Denpasar",
+        "coldest_city_code": "DPS",
+        "coldest_avg_temp": 25.9,
+        "most_volatile_city": "Surabaya",
+        "most_volatile_range": 0.0
+      },
+      "detailed_data": [
+        {
+          "kode_kota": "SBY",
+          "nama_kota": "Surabaya",
+          "jumlah_observasi": 2,
+          "rata_rata_suhu": 27.5,
+          "suhu_tertinggi": 27.5,
+          "suhu_terendah": 27.5,
+          "std_dev_suhu": 0.0,
+          "rentang_suhu": 0.0
+        },
+        {
+          "kode_kota": "JKT",
+          "nama_kota": "Jakarta",
+          "jumlah_observasi": 2,
+          "rata_rata_suhu": 27.0,
+          "suhu_tertinggi": 27.0,
+          "suhu_terendah": 27.0,
+          "std_dev_suhu": 0.0,
+          "rentang_suhu": 0.0
+        },
+        {
+          "kode_kota": "MDN",
+          "nama_kota": "Medan",
+          "jumlah_observasi": 2,
+          "rata_rata_suhu": 26.7,
+          "suhu_tertinggi": 26.7,
+          "suhu_terendah": 26.7,
+          "std_dev_suhu": 0.0,
+          "rentang_suhu": 0.0
+        },
+        {
+          "kode_kota": "MKS",
+          "nama_kota": "Makassar",
+          "jumlah_observasi": 2,
+          "rata_rata_suhu": 26.6,
+          "suhu_tertinggi": 26.6,
+          "suhu_terendah": 26.6,
+          "std_dev_suhu": 0.0,
+          "rentang_suhu": 0.0
+        },
+        {
+          "kode_kota": "SMG",
+          "nama_kota": "Semarang",
+          "jumlah_observasi": 2,
+          "rata_rata_suhu": 26.0,
+          "suhu_tertinggi": 26.0,
+          "suhu_terendah": 26.0,
+          "std_dev_suhu": 0.0,
+          "rentang_suhu": 0.0
+        },
+        {
+          "kode_kota": "DPS",
+          "nama_kota": "Denpasar",
+          "jumlah_observasi": 2,
+          "rata_rata_suhu": 25.9,
+          "suhu_tertinggi": 25.9,
+          "suhu_terendah": 25.9,
+          "std_dev_suhu": 0.0,
+          "rentang_suhu": 0.0
+        }
+      ]
+    },
+    "analisis_2_extreme_weather": {
+      "analisis": "extreme_weather_detection",
+      "timestamp": "2026-04-28T21:25:54.463805",
+      "summary": {
+        "total_extreme_events": 2,
+        "dangerous_cities": [
+          {
+            "kode_kota": "DPS",
+            "nama_kota": "Denpasar",
+            "total_ekstrem": 2
+          }
+        ]
+      }
+    },
+    "analisis_3_hourly_trend": {
+      "analisis": "hourly_temperature_trend",
+      "timestamp": "2026-04-28T21:26:01.464151",
+      "summary": {
+        "hottest_hour": 21,
+        "coldest_hour": 21,
+        "optimal_delivery_hours": []
+      },
+      "hourly_data": [
+        {
+          "jam": 21,
+          "jumlah_observasi": 12,
+          "rata_rata_suhu_jam": 26.62,
+          "suhu_tertinggi_jam": 27.5,
+          "suhu_terendah_jam": 25.9,
+          "volatilitas_suhu": 0.58
+        }
+      ]
+    }
+  }
+}

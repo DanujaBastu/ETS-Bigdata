@@ -141,8 +141,56 @@ python3 kafka/producer_rss.py
 ```bash
 python3 kafka/consumer_to_hdfs.py
 ```
+## Dokumentasi Kafka
 
-docker exec -it namenode hdfs dfs -ls -R /data/weather
+### Producer API (Data Cuaca Kota)
 
-<img width="1158" height="133" alt="image" src="https://github.com/user-attachments/assets/e33d6d72-be72-4b1c-ab7f-ea53e99bee3e" />
+<img width="1105" height="479" alt="image" src="https://github.com/user-attachments/assets/d04497d7-c728-45e4-9a0f-97950dad9a3e" />
+
+Data dari API disimpan ke HDFS
+
+<img width="1113" height="354" alt="image" src="https://github.com/user-attachments/assets/5e0c4206-22d3-4035-9f42-4042f195a709" />
+
+### Producer RSS (Data Berita Cuaca)
+
+Berhasil mengambil data dari RSS yang akan disimpan ke Kafka
+<img width="1117" height="668" alt="image" src="https://github.com/user-attachments/assets/53dfcfd3-53a7-41cd-910c-d15878056d47" />
+
+### Consumer to HDFS (Pusat Data)
+
+Mengirim data (20 data) ke HDFS
+
+<img width="1028" height="551" alt="image" src="https://github.com/user-attachments/assets/6c848b21-aa66-41d7-b515-283402ffd733" />
+
+RSS mengirimkan data setiap 300 detik (dokumentasi di bawah terlihat penambahan data dari artikel sebanyak 89)
+
+<img width="1041" height="98" alt="image" src="https://github.com/user-attachments/assets/faa7afea-efd8-4da6-a2c8-e4110cf150e1" />
+
+Data dari rss sebelumnya sudah tersimpan di hdfs dalam bentuk `.json` sehingga kembali 0, namun karena ditambahkannya data dari artikel lain, `consumer_to_hdfs` bertambah, dan dikirimkan (flush) ke HDFS.
+
+<img width="1268" height="674" alt="image" src="https://github.com/user-attachments/assets/87dd23fc-8c04-4383-aa88-9bcbd81f9ada" />
+
+
+### Hasil penyimpanan di HDFS (setelah program dijalankan kurang lebih 24 menit)
+
+`docker exec -it namenode hdfs dfs -ls -R /data/weather/rss`
+
+<img width="1168" height="113" alt="image" src="https://github.com/user-attachments/assets/83e071f8-84ac-4422-933c-4bcd3e031a95" />
+
+
+`docker exec -it namenode hdfs dfs -ls -R /data/weather`
+
+<img width="1193" height="297" alt="image" src="https://github.com/user-attachments/assets/72c82102-a617-471a-905a-27db9a3262b8" />
+
+## Kendala
+Dalam pengembangan pipeline Big Data WeatherPulse, terdapat beberapa kendala teknis yang saya hadapi, di antaranya:
+
+- Ketersediaan Data pada RSS Feed (Zero-Data Fetch):
+Pada beberapa sesi pengoperasian, ditemukan bahwa sumber RSS tidak menyediakan artikel baru (Fetched 0 artikel). Hal ini terjadi dikarenakan tidak adanya pembaruan data dari sisi penyedia (source) atau sistem deduplikasi pada Producer yang mencegah pengiriman data yang sama secara berulang ke Kafka. Solusi yang diterapkan adalah dengan menambahkan variasi sumber RSS untuk memastikan aliran data tetap terjaga.
+<img width="1244" height="294" alt="image" src="https://github.com/user-attachments/assets/3eda88bd-2e27-41c6-80e0-68a9e0d28622" />
+
+- Manajemen Status Buffer & Offset:
+Munculnya jeda waktu (latency) saat proses Consumer Group Rebalancing mengakibatkan beberapa data awal yang dikirim oleh Producer tidak tertangkap oleh Consumer. Kendala ini diselesaikan dengan memastikan urutan eksekusi yang tepat—menjalankan Consumer hingga status `Ready` sebelum mengaktifkan Producer, serta memantau proses Periodical Flush agar data dalam buffer tidak hilang saat terjadi interupsi sistem.
+
+
 
