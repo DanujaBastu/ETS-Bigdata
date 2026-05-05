@@ -202,6 +202,11 @@ Data dari rss sebelumnya sudah tersimpan di hdfs dalam bentuk `.json` sehingga k
 <img width="1193" height="297" alt="image" src="https://github.com/user-attachments/assets/72c82102-a617-471a-905a-27db9a3262b8" />
 
 ## Dahsboard Running
+Cara Menjalankan Dashboard
+```
+python3 dashboard/app.py
+```
+
 <img width="1600" height="826" alt="image" src="https://github.com/user-attachments/assets/90451f59-dfea-4a6c-855e-52f8f834f629" />
 <img width="1600" height="739" alt="image" src="https://github.com/user-attachments/assets/3436b267-a98a-4fdc-a0f1-aad9d6869a83" />
 
