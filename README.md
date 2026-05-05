@@ -142,7 +142,23 @@ python3 kafka/producer_rss.py
 python3 kafka/consumer_to_hdfs.py
 ```
 
+
+<img width="1105" height="479" alt="image" src="https://github.com/user-attachments/assets/d04497d7-c728-45e4-9a0f-97950dad9a3e"
+
+Producer RSS (Data Berita Cuaca)
+
+<img width="1117" height="668" alt="image" src="https://github.com/user-attachments/assets/53dfcfd3-53a7-41cd-910c-d15878056d47" />
+
+
+consumer_to_hdfs.py
 docker exec -it namenode hdfs dfs -ls -R /data/weather
+
+<img width="1107" height="576" alt="image" src="https://github.com/user-attachments/assets/9c1417d4-d7a8-45a2-a8b9-a802feeb5245" />
+
+
+<img width="1028" height="551" alt="image" src="https://github.com/user-attachments/assets/6c848b21-aa66-41d7-b515-283402ffd733" />
+
+<img width="1113" height="354" alt="image" src="https://github.com/user-attachments/assets/5e0c4206-22d3-4035-9f42-4042f195a709" />
 
 <img width="1158" height="133" alt="image" src="https://github.com/user-attachments/assets/e33d6d72-be72-4b1c-ab7f-ea53e99bee3e" />
 
