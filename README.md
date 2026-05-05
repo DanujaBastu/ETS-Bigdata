@@ -132,10 +132,7 @@ Clarissa Aydin - 5027241014
 ### Cara Menjalankan
 
 #### 1. Persiapan Infrastruktur (Docker)
-Jalankan Hadoop & Kafka
-```bash
-docker compose -f docker-compose-kafka.yml up -d
-docker compose -f docker-compose-hadoop.yml up -d
+
 ```
 Cek apakah semua kontainer sudah status (Up)
 ```bash
@@ -162,6 +159,7 @@ python3 kafka/producer_rss.py
 ```bash
 python3 kafka/consumer_to_hdfs.py
 ```
+
 ## Dokumentasi Kafka
 
 ### Producer API (Data Cuaca Kota)
