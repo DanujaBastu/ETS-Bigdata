@@ -1,17 +1,23 @@
 # ETS AI
 ## Kelompok 8 
 Anggota dan Kontribusi :
-Danuja Prasasta Bastu - 5027241037 -> Setup Docker (Hadoop & Kafka), buat topic, troubleshooting infrastruktur
-Raihan Fahri Ghazali - 5027241061 -> producer_api.py — integrasi API eksternal
-Clarissa Aydin Rahmazea - 5027241014 -> producer_rss.py + consumer_to_hdfs.py
-Dimas Muhammad Putra - 5027241075 -> spark/analysis.ipynb — 3 analisis wajib
-Mochkamad Maulana Syafaat - 5027241021 -> spark/analysis.ipynb — 3 analisis wajib
+- Danuja Prasasta Bastu - 5027241037 -> Setup Docker (Hadoop & Kafka), buat topic, troubleshooting infrastruktur
+- Raihan Fahri Ghazali - 5027241061 -> producer_api.py — integrasi API eksternal
+- Clarissa Aydin Rahmazea - 5027241014 -> producer_rss.py + consumer_to_hdfs.py
+- Dimas Muhammad Putra - 5027241075 -> spark/analysis.ipynb — 3 analisis wajib
+- Mochkamad Maulana Syafaat - 5027241021 -> spark/analysis.ipynb — 3 analisis wajib
 
 ## Kenapa WeatherPulse?
 Menurut kami, topik ini sangat relevan karena menawarkan representasi nyata dari penerapan Big Data untuk memecahkan masalah industri. Topik ini secara langsung menjawab tantangan geografis dan iklim Indonesia yang dinamis serta sulit diprediksi. Oleh karena itu, kehadiran sistem ini diharapkan dapat memfasilitasi pengambilan keputusan yang lebih akurat terkait keamanan rute pengiriman logistik darat, berdasarkan pantauan kondisi cuaca di kota-kota yang dilalui.
 
+## Diagram Arsitektur
 <img width="1440" height="1240" alt="image" src="https://github.com/user-attachments/assets/d4da666e-5f91-4c48-900d-bb70fcaeecc6" />
 
+1. Sumber Data — Proyek ini menarik data dari dua sumber berbeda: Open-Meteo API untuk data cuaca kota-kota Indonesia (suhu, kelembaban, kecepatan angin, dll.) dan RSS Feed dari Tempo & Kompas untuk berita bertema cuaca.
+2. Kafka Producers — Masing-masing sumber punya producer tersendiri. producer_api.py mengambil data JSON dari Open-Meteo lalu mempublikasikannya ke Kafka topic weather-api, sementara producer_rss.py mem-parsing berita RSS dan mengirimnya ke topic weather-rss.
+3. Apache Kafka — Bertindak sebagai message broker di tengah pipeline. Kafka memisahkan produsen dan konsumen data, sehingga kecepatan produksi dan konsumsi tidak saling bergantung.
+4. Consumer & Storage — consumer_to_hdfs.py membaca dari kedua Kafka topic, melakukan buffering, lalu menyimpan data ke dua tempat sekaligus: HDFS untuk penyimpanan terdistribusi, dan file JSON lokal untuk kebutuhan dashboard.
+5. Output Akhir — Data di HDFS dianalisis menggunakan Spark (notebook analysis.ipynb) yang menghasilkan grafik dan statistik. Data JSON lokal langsung dibaca oleh Flask Dashboard (app.py) yang menyajikan visualisasi ke pengguna via web browser.
 
 ## ⚙️ Setup Project
 Danuja - 037
