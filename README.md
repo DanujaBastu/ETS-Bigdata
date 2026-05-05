@@ -147,6 +147,10 @@ python3 kafka/consumer_to_hdfs.py
 
 <img width="1105" height="479" alt="image" src="https://github.com/user-attachments/assets/d04497d7-c728-45e4-9a0f-97950dad9a3e" />
 
+Data dari API disimpan ke HDFS
+
+<img width="1113" height="354" alt="image" src="https://github.com/user-attachments/assets/5e0c4206-22d3-4035-9f42-4042f195a709" />
+
 ### Producer RSS (Data Berita Cuaca)
 
 Berhasil mengambil data dari rss
@@ -156,7 +160,7 @@ Berhasil mengambil data dari rss
 
 Mengirim data (20 data) ke HDFS
 
-<img width="1107" height="576" alt="image" src="https://github.com/user-attachments/assets/9c1417d4-d7a8-45a2-a8b9-a802feeb5245" />
+<img width="1028" height="551" alt="image" src="https://github.com/user-attachments/assets/6c848b21-aa66-41d7-b515-283402ffd733" />
 
 RSS mengirimkan data setiap 300 detik (dokumentasi di bawah terlihat penambahan data dari artikel sebanyak 89)
 
@@ -167,18 +171,16 @@ Data dari rss sebelumnya sudah tersimpan di hdfs dalam bentuk `.json` sehingga k
 <img width="1268" height="674" alt="image" src="https://github.com/user-attachments/assets/87dd23fc-8c04-4383-aa88-9bcbd81f9ada" />
 
 
+### Hasil penyimpanan di HDFS (setelah program dijalankan kurang lebih 24 menit)
+
+`docker exec -it namenode hdfs dfs -ls -R /data/weather/rss`
+
+<img width="1168" height="113" alt="image" src="https://github.com/user-attachments/assets/83e071f8-84ac-4422-933c-4bcd3e031a95" />
 
 
-<img width="1028" height="551" alt="image" src="https://github.com/user-attachments/assets/6c848b21-aa66-41d7-b515-283402ffd733" />
+`docker exec -it namenode hdfs dfs -ls -R /data/weather`
 
-<img width="1113" height="354" alt="image" src="https://github.com/user-attachments/assets/5e0c4206-22d3-4035-9f42-4042f195a709" />
+<img width="1193" height="297" alt="image" src="https://github.com/user-attachments/assets/72c82102-a617-471a-905a-27db9a3262b8" />
 
-docker exec -it namenode hdfs dfs -ls -R /data/weather/rss
-
-<img width="1175" height="62" alt="image" src="https://github.com/user-attachments/assets/9791dea6-674f-43c9-9be5-956d5831dbec" />
-
-docker exec -it namenode hdfs dfs -ls -R /data/weather
-
-<img width="1138" height="178" alt="image" src="https://github.com/user-attachments/assets/bdebde5b-c40f-48f3-b60a-ed205dca0ba6" />
 
 
