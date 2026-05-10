@@ -202,15 +202,45 @@ Data dari rss sebelumnya sudah tersimpan di hdfs dalam bentuk `.json` sehingga k
 <img width="1193" height="297" alt="image" src="https://github.com/user-attachments/assets/72c82102-a617-471a-905a-27db9a3262b8" />
 
 ## Dokumentasi Spark Analisis
+Cara Menjalankan Dashboard
+
 ```
 docker compose up -d
 ```
 ```
 .\start_pipeline.ps1
 ```
-### Analisis 1
-### Analisis 2
-### Analisis 3
+### Analisis 1 — Perbandingan Suhu Antar Kota
+<img src="Assets/Analisis 1.png">
+Analisis pertama digunakan untuk membandingkan kondisi suhu dari beberapa kota berdasarkan: 
+
+  - Rata-rata suhu
+  - Suhu tertinggi
+  - Suhu terendah
+  - Standar deviasi suhu
+  - Jumlah observasi data
+
+### Analisis 2 — Deteksi Kondisi Cuaca Ekstrem
+<img src="Assets/Analisis 2.png">
+Analisis kedua digunakan untuk mendeteksi kemungkinan kondisi cuaca ekstrem berdasarkan threshold tertentu. 
+Kriteria Cuaca Ekstrem
+Parameter	Threshold
+Suhu	> 35°C
+Kelembaban	> 90%
+Kecepatan Angin	> 40 km/h
+
+### Analisis 3 — Tren Suhu Per Jam (Pola Diurnal)
+<img src="Assets/Analisis 3.png">
+Analisis ketiga digunakan untuk melihat pola perubahan suhu berdasarkan jam.
+
+Tujuan :
+- Jam terpanas
+- Jam terdingin
+- Pola suhu harian (diurnal pattern)
+
+### Demo Video
+Klik gambar di bawah untuk menonton demo project:
+[![Watch the Demo](https://img.youtube.com/vi/JBqQvpsODlI/maxresdefault.jpg)](https://youtu.be/JBqQvpsODlI)
 
 
 ## Dahsboard Running
