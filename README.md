@@ -223,11 +223,12 @@ Analisis pertama digunakan untuk membandingkan kondisi suhu dari beberapa kota b
 ### Analisis 2 — Deteksi Kondisi Cuaca Ekstrem
 <img src="Assets/Analisis 2.png">
 Analisis kedua digunakan untuk mendeteksi kemungkinan kondisi cuaca ekstrem berdasarkan threshold tertentu. 
+
 Kriteria Cuaca Ekstrem
 Parameter	Threshold
-Suhu	> 35°C
-Kelembaban	> 90%
-Kecepatan Angin	> 40 km/h
+- Suhu	> 35°C
+- Kelembaban	> 90%
+- Kecepatan Angin	> 40 km/h
 
 ### Analisis 3 — Tren Suhu Per Jam (Pola Diurnal)
 <img src="Assets/Analisis 3.png">
