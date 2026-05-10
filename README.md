@@ -201,6 +201,18 @@ Data dari rss sebelumnya sudah tersimpan di hdfs dalam bentuk `.json` sehingga k
 
 <img width="1193" height="297" alt="image" src="https://github.com/user-attachments/assets/72c82102-a617-471a-905a-27db9a3262b8" />
 
+## Dokumentasi Spark Analisis
+```
+docker compose up -d
+```
+```
+.\start_pipeline.ps1
+```
+### Analisis 1
+### Analisis 2
+### Analisis 3
+
+
 ## Dahsboard Running
 Cara Menjalankan Dashboard
 ```
